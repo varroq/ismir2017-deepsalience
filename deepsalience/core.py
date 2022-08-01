@@ -3,6 +3,8 @@
 from __future__ import print_function
 
 import numpy as np
+import json
+
 np.random.seed(1337)
 import keras
 from keras import backend as K

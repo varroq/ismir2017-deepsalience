@@ -2,12 +2,16 @@
 from __future__ import print_function
 
 import argparse
+
+import scipy
 from joblib import Parallel, delayed
 import librosa
 import medleydb as mdb
 from medleydb import mix
 import numpy as np
 import os
+
+from medleydb.mix import VOCALS
 from scipy.signal import upfirdn
 from scipy.ndimage import filters
 import sox

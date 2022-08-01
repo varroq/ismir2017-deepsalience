@@ -11,7 +11,7 @@ import csv
 from keras.models import Model
 from keras.layers import Dense, Input, Reshape, Lambda
 from keras.layers.convolutional import Conv2D
-from keras.layers.normalization import BatchNormalization
+from keras.layers import BatchNormalization
 from keras import backend as K
 from keras.models import load_model
 
@@ -176,10 +176,12 @@ def get_single_test_prediction(model, input_hcqt):
     for i, t in enumerate(t_slices):
         print("   > {} / {}".format(i + 1, len(t_slices)))
         prediction = model.predict(input_hcqt[:, :, t:t+n_slices, :])
+        print('Pred shape', prediction.shape)
         output_list.append(prediction[0, :, :])
 
     predicted_output = np.hstack(output_list)
 
+    print(predicted_output.shape)
     return predicted_output
 
 
@@ -248,6 +250,7 @@ def get_singlef0(pitch_activation_mat, freq_grid, time_grid, thresh=0.3,
         Frequency values
 
     """
+    print(pitch_activation_mat.shape)
     max_idx = np.argmax(pitch_activation_mat, axis=0)
     est_freqs = []
     for i, f in enumerate(max_idx):
